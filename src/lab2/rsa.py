@@ -13,7 +13,15 @@ def is_prime(n: int) -> bool:
     False
     """
     # PUT YOUR CODE HERE
-    pass
+    i = 1
+    count = 0 # колчество делителей
+    while i*i < n :
+        if n // i == 0 : count += 2
+        i += 1
+    if i*i == n : count += 1
+
+    return count == 2
+
 
 
 def gcd(a: int, b: int) -> int:

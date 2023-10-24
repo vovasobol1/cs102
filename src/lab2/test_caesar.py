@@ -11,6 +11,7 @@ class TestCaesarCipher(unittest.TestCase):
         # Проверяем, что исключение вызывается при некорректном типе данных
         with self.assertRaises(ValueError):
             encrypt_caesar(123 , 5 )  # Попытка зашифровать целое число
+            encrypt_caesar([1 , 2 , 3], 5)  # Попытка зашифровать массив
     def test_decrypt_caesar(self):
         # Проверяем расшифрованный текст с сдвигом 3
         self.assertEqual(decrypt_caesar("SBWKRQ"), "PYTHON")
@@ -21,5 +22,7 @@ class TestCaesarCipher(unittest.TestCase):
         # Проверяем, что исключение вызывается при некорректном типе данных
         with self.assertRaises(ValueError):
             encrypt_caesar(123 , 5 )  # Попытка зашифровать целое число
+            encrypt_caesar([1, 2, 3], 5)  # Попытка зашифровать массив
+
 if __name__ == '__main__':
     unittest.main()
