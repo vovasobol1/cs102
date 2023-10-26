@@ -38,8 +38,8 @@ def gcd(a: int, b: int) -> int:
         prom = b
     else:
         prom = a
-    for i in range(1, temp + 1):
-        if ((a % i == 0) and (b % i == 0)):
+    for i in range(1, prom + 1):
+        if (a % i == 0) and (b % i == 0):
             result = i
     return result
 
@@ -52,8 +52,19 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     23
     """
     # PUT YOUR CODE HERE
-    pass
+    d = 0
+    for d in range(1, max(e, phi)):
+        if (d * e) % phi == 1:
+            res1 = d
+    res = 0
+    while (e % phi != 0):
+        res = e % phi
+        e = phi
+        phi = res
+    if phi == 1:
+        return res1
 
+    return x0
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
     if not (is_prime(p) and is_prime(q)):
