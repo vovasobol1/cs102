@@ -16,7 +16,7 @@ def is_prime(n: int) -> bool:
     i = 1
     count = 0 # колчество делителей
     while i*i < n :
-        if n // i == 0 : count += 2
+        if n % i == 0 : count += 2
         i += 1
     if i*i == n : count += 1
 
@@ -32,8 +32,16 @@ def gcd(a: int, b: int) -> int:
     >>> gcd(3, 7)
     1
     """
+    result = 0
     # PUT YOUR CODE HERE
-    pass
+    if a > b:  # define the if condition
+        prom = b
+    else:
+        prom = a
+    for i in range(1, temp + 1):
+        if ((a % i == 0) and (b % i == 0)):
+            result = i
+    return result
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
