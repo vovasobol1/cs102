@@ -17,6 +17,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     keyword_len = len(keyword)  # Длина ключа
 
     for i in range(len(plaintext)):
+        decrypted_char = ""
         char = plaintext[i]
 
         # если char это буква то выполним шифрование
