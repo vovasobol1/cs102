@@ -162,51 +162,91 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     """Генерация судоку заполненного на N элементов"""
+    # Создаем пустую доску размером 9x9, заполненную точками
     empty_sudoku = [["." for _ in range(9)] for _ in range(9)]
+
+    # Если N равно 0, возвращаем пустую доску
     if N == 0:
         return empty_sudoku
 
+    # Решаем пустую доску
     sudoku = solve(grid=empty_sudoku)
+
+    # Если не удалось найти решение для пустой доски, возвращаем пустую доску
     if sudoku is None:
         return empty_sudoku
 
+    # Вычисляем размер квадрата игрового поля (в данном случае, 9x9)
     field_square_size = 9 * 9
+
+    # Если N больше, чем размер квадрата игрового поля, возвращаем решенное судоку
     if N > field_square_size:
         return sudoku
 
+    # Определяем количество свободных позиций, которые нужно оставить
     free_position_count = field_square_size - N
+
+    # Удаляем случайные значения из решенного судоку, чтобы получить начальное состояние
     while free_position_count != 0:
         row_index_position, col_index_position = (
             random.randint(0, 8),
             random.randint(0, 8),
         )
 
+        # Если значение в этой ячейке уже удалено, продолжаем цикл
         if sudoku[row_index_position][col_index_position] == ".":
             continue
 
+        # Удаляем значение из ячейки
         sudoku[row_index_position][col_index_position] = "."
         free_position_count -= 1
 
+    # Возвращаем сгенерированное судоку
     return sudoku
 
 
+
 def run_solve(puzzle: tp.List[tp.List[str]]) -> None:
+    # Замеряем время начала решения
     start = time.time()
+
+    # Решаем судоку
     solution = solve(puzzle)
+
+    # Замеряем время окончания решения
     end = time.time()
+
+    # Если найдено решение
     if solution is not None:
-        print(f"{end-start}")
+        # Выводим время, затраченное на решение
+        print(f"{end - start} seconds")
+        # Выводим решение
         display(solution)
     else:
+        # Если решение не найдено, выводим сообщение
         print(f"Puzzle {puzzle} can't be solved")
 
 
 if __name__ == "__main__":
+    # Если скрипт запущен как основная программа
+
+    # Перебираем имена файлов с пазлами
     for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
+
+        # Читаем судоку из файла и получаем начальное состояние
         grid = read_sudoku(fname)
+
+        # Выводим начальное состояние судоку
         display(grid)
+
+        # Решаем судоку
         solution = solve(grid)
+
+        # Проверяем, было ли найдено решение
         if not solution:
+            # Если решение не найдено, выводим сообщение
             print(f"Puzzle {fname} can't be solved")
         else:
+            # Если решение найдено, выводим конечное состояние судоку
             display(solution)
+
